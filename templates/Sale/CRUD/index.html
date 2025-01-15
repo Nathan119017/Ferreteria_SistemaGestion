@@ -1,0 +1,83 @@
+{% extends 'base\base.html' %}
+{% block estilos %}
+    
+{% endblock %}
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Ventas</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    <div>
+        <a href="{% url 'sale:sale_create' %}" class="btn btn-success">
+            <i class="bi bi-person-add"></i>
+            Agregar Venta
+        </a>
+    </div>
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Producto</th>
+                <th>Cantidad de Producto</th>
+                <th>Precio de Venta</th>
+                <th>Fecha de Venta</th>
+                <th>Metodo de Pago</th>
+                <th>Total de Venta</th>
+                <th>Sucursal</th>
+                <th>Usuario</th>
+                <th>Num. de Factura</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Sale in venta %}   
+            <tr>
+                <td>
+                    <a href="{% url 'sale:sale_edit' Sale.id %}" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"> </i>
+                        
+                    </a>
+                    <a href="{% url 'sale:sale_delete' Sale.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        
+                    </a>
+                </td>
+                <td>{{Sale.id}}</td>
+                <td>{{Sale.cliente}}</td>
+                <td>{{Sale.producto}}</td>
+                <td>{{Sale.cantidad_producto}}</td>
+                <td>{{Sale.precio_venta}}</td>
+                <td>{{Sale.fecha_venta|date:"d/m/Y"}}</td>
+                <td>{{Sale.metodo_pago}}</td>
+                <td>{{Sale.total_venta}}</td>
+                <td>{{Sale.sucursal}}</td>
+                <td>{{Sale.usuario}}</td>
+                <td>{{Sale.num_factura}}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+
+{% endblock %}

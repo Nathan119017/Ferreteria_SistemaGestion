@@ -1,0 +1,56 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+   
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Formulario de Descuentos y Promociones</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="">Nombre Descuento o Promocion:</label>
+                    {{ form.nombrepromocion_descuento }}
+
+                    {% if form.nombrepromocion_descuento.errors %}
+                    <div class="text-danger">
+                        {{ form.nombrepromocion_descuento.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="">Porcentaje de Descuento:</label>
+                    {{ form.porcentaje }}
+
+                    {% if form.porcentaje.errors %}
+                    <div class="text-danger">
+                        {{ form.porcentaje.errors }}
+                    </div>
+                    {% endif %}
+
+                    
+                </div>
+                <div class="form-group">
+                    <label for="">Descuento o Promocion:</label>
+                    {{ form.promocion_descuento }}
+
+                    {% if form.promocion_descuento.errors %}
+                    <div class="text-danger">
+                        {{ form.promocion_descuento.errors }}
+                    </div>
+                    {% endif %}
+
+                </div> 
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            <div class="table table-striped"></div>
+    <a href="{% url 'discprom:home_discprom' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

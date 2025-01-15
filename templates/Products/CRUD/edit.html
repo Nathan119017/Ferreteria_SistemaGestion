@@ -1,0 +1,105 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+   
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Formulario de Productos</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-group">
+                    <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
+                    {{ form.nombre }}
+                   
+                    {% if form.nombre.errors %}
+                    <div class="text-danger">
+                        {{ form.nombre.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.descripcion.id_for_label }}">Descripcion:</label>
+                    {{ form.descripcion }}
+
+                    {% if form.descripcion.errors %}
+                    <div class="text-danger">
+                        {{ form.descripcion.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="">¿Tiene fecha de vencimiento?</label>
+                    <input type="checkbox" id="has_expiry_date" name="has_expiry_date">
+                </div>
+                
+                <div class="form-group" id="div_fecha_vencimiento" style="display: none;">
+                    <label for="">Fecha de Vencimiento:</label>
+                    {{ form.fecha_de_vencimiento }}
+                    {% if form.fecha_de_vencimiento.errors %}
+                        <div class="text-danger">
+                            {{ form.fecha_de_vencimiento.errors }}
+                        </div>
+                    {% endif %}
+                    </div>
+                <div class="form-group">
+                    <label for="{{ form.precio.id_for_label }}">Precio del Producto:</label>
+                    {{ form.precio }}
+
+                    {% if form.precio.errors %}
+                    <div class="text-danger">
+                        {{ form.precio.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.categoria.id_for_label }}">Categoria del Producto:</label>
+                    {{ form.categoria }}
+
+                    {% if form.categoria.errors %}
+                    <div class="text-danger">
+                        {{ form.categoria.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.proveedor.id_for_label }}">Proveedor del Producto:</label>
+                    {{ form.proveedor }}
+
+                    {% if form.proveedor.errors %}
+                    <div class="text-danger">
+                        {{ form.proveedor.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            <div class="table table-striped"></div>
+    <a href="{% url 'products:home_products' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#has_expiry_date').change(function(){
+            if($(this).is(':checked')){
+                $('#div_fecha_vencimiento').show();
+            }else{
+                $('#div_fecha_vencimiento').hide();
+            }
+        });
+    });
+</script>
+
+{% endblock %}

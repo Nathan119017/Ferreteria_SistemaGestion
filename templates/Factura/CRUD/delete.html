@@ -1,0 +1,86 @@
+{% extends 'Factura/base.html' %}
+{% block contenido %}
+
+<div class="card">
+<div class="card-body">
+    <h1>¿Estás seguro que deseas eliminar esta Factura?</h1>
+
+    {% if tiene_productos %}
+            <div class="alert alert-danger" role="alert">
+                No puedes eliminar esta devolución porque está vinculada con uno o más Ordenes.
+            </div>
+        {% endif %}
+
+        {% if tiene_venta %}
+            <div class="alert alert-danger" role="alert">
+                No puedes eliminar esta devolución porque está vinculada con uno o más Ventas.
+            </div>
+        {% endif %}
+
+   
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">ID Factura:</label>
+            <input type="text"  class="form-control" value="{{factura.num_factura}}" disabled>
+        </div>    
+        <div class="form-group">
+            <label for="">ID Cliente:</label>
+            <input type="text" class="form-control" value="{{factura.idcliente}}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="">ID Empleado:</label>
+            <input type="text" class="form-control" value="{{factura.idempleado}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">ID Metodo de Pago:</label>
+            <input type="text" class="form-control" value="{{factura.idmetododepago}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">ID Producto:</label>
+            <input type="text" class="form-control" value="{{factura.idproductsdetail}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">ID Impuesto:</label>
+            <input type="text" class="form-control" value="{{factura.idtax}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Fecha de Emision:</label>
+            <input type="text" class="form-control" value="{{factura.fechaemision}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">ID Descuento:</label>
+            <input type="text" class="form-control" value="{{factura.iddescuento}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">ID CAI:</label>
+            <input type="text" class="form-control" value="{{factura.idcai}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">RTN:</label>
+            <input type="text" class="form-control" value="{{factura.RTN}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Cantidad:</label>
+            <input type="text" class="form-control" value="{{factura.cantidad}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Precio Unitario:</label>
+            <input type="text" class="form-control" value="{{factura.precio_unitario}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Notas:</label>
+            <input type="text" class="form-control" value="{{factura.Notas}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Total:</label>
+            <input type="text" class="form-control" value="{{factura.total}}" disabled> 
+        </div>
+        <input type="submit" value="Eliminar" class="btn btn-danger{% if tiene_productos %} disabled{% endif %}{% if tiene_venta %} disabled{% endif %}">
+    </form>
+   <div class="table table-striped"></div>
+    <a href="{% url 'factura:home_factura' %}" class="btn btn-primary">Cancelar</a>
+</div>
+</div>
+
+{% endblock %}

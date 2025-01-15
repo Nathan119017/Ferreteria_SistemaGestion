@@ -1,0 +1,74 @@
+{% extends 'base\base.html' %}
+{% block estilos %}
+    
+{% endblock %}
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Historial de Productos</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>Productos ID</th>
+                <th>Cambio Nombre</th>
+                <th>Cambio Descripcion</th>
+                <th>Cambio Fecha de Vencimiento</th>
+                <th>Cambio Stock</th>
+                <th>Cambio Precio</th>
+                <th>Cambio Categoria</th>
+                <th>Cambio Proveedor</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Products_History in productos_historial %}   
+            <tr>
+                <td>
+                        
+                    </a>
+                    <a href="{% url 'products_history:products_history_delete' Products_History.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        
+                    </a>
+                </td>
+                <td>{{ Products_History.foranea}}</td>
+                <td>{{Products_History.nombre_cambio}}</td>
+                <td>{{Products_History.descripcion_cambio}}</td>
+                <td>{{Products_History.fecha_de_vencimiento_cambio}}</td>
+                <td>{{Products_History.stock_cambio}}</td>
+                <td>{{Products_History.precio_cambio}}</td>
+                <td>{{Products_History.categoria_cambio}}</td>
+                <td>{{Products_History.proveedor_cambio}}</td>
+                <td>{{ Products_History.Fecha_Hora|date:"Y-m-d" }}</td>
+                <td>{{ Products_History.Fecha_Hora|time:"H:i:s" }}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+
+<div class="card">
+<div class="card-body">
+    <h1>¿Estás seguro que deseas eliminar esta Venta?</h1>
+   
+
+    {% if tiene_productos %}
+            <div class="alert alert-danger" role="alert">
+                No puedes eliminar esta Venta porque está vinculado con uno o más productos.
+            </div>
+        {% endif %}
+
+        
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">Cliente:</label>
+            <input type="text"  class="form-control" value="{{venta.cliente}}" disabled>
+        </div>    
+        <div class="form-group">
+            <label for="">Producto:</label>
+            <input type="text" class="form-control" value="{{venta.producto}}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="">Cantidad de Producto:</label>
+            <input type="text" class="form-control" value="{{venta.cantidad_producto}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Precio de Venta:</label>
+            <input type="text" class="form-control" value="{{venta.precio_venta}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Fecha de Venta:</label>
+            <input type="text" class="form-control" value="{{venta.fecha_venta|date:"d/m/Y"}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Metodos de Pago:</label>
+            <input type="text" class="form-control" value="{{venta.metodo_pago}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Total de la Venta:</label>
+            <input type="text" class="form-control" value="{{venta.total_venta}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Sucursal:</label>
+            <input type="text" class="form-control" value="{{venta.sucursal}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Usuario:</label>
+            <input type="text" class="form-control" value="{{venta.usuario}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Num. de la Factura:</label>
+            <input type="text" class="form-control" value="{{venta.num_factura}}" disabled> 
+        </div>
+        
+       
+        <input type="submit" value="Eliminar" class="btn btn-danger{% if tiene_productos %} disabled{% endif %}">
+    </form>
+   <div class="table table-striped"></div>
+    <a href="{% url 'sale:home_sale' %}" class="btn btn-primary">Cancelar</a>
+</div>
+</div>
+{% endblock %}

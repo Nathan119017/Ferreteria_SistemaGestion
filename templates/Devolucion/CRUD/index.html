@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+   
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Devoluciones Registradas</h5>
+    <div class="card-body">
+        <div>
+            <a href="{% url 'devolucion:devolucion_create' %}" class="btn btn-success">
+                <i class="bi bi-person-add"></i>
+                Agregar Devolución
+            </a>
+        </div>
+        <div class="table table-striped"></div>
+        <table id="dataTable" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Acciones</th>
+                    <th>ID</th>
+                    <th>Nombre Producto</th>
+                    <th>Cantidad Retornada</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for devolucion in devoluciones %}   
+                <tr>
+                    <td>
+                        <a href="{% url 'devolucion:devolucion_edit' devolucion.id %}" class="btn btn-primary">
+                            <i class="bi bi-pencil-square"> </i>
+                        </a>
+                        <a href="{% url 'devolucion:devolucion_delete' devolucion.id %}" class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                    <td>{{ devolucion.id }}</td>
+                    <td>{{ devolucion.nombre_producto }}</td>
+                    <td>{{ devolucion.cantidad_retornada }}</td>
+                </tr>
+            {% endfor %}   
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+        // Inicializar el plugin DataTables
+        $('#dataTable').DataTable();
+    });
+</script>
+
+{% endblock %}

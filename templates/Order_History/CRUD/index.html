@@ -1,0 +1,76 @@
+{% extends 'base\base.html' %}
+{% block estilos %}
+    
+{% endblock %}
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Historial de Ordenes</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>Orden ID</th>
+                <th>Cambio Num. de Orden</th>
+                <th>Cambio Empleado</th>
+                <th>Cambio Fecha de Pedido</th>
+                <th>Cambio Metodo de Pago</th>
+                <th>Cambio Estado de Pago</th>
+                <th>Cambio Estado de Pedido</th>
+                <th>Cambio de CAI</th>
+                <th>Cambio de Total</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Order_History in orden_historial %}   
+            <tr>
+                <td>
+                        
+                    </a>
+                    <a href="{% url 'order_history:order_history_delete' Order_History.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        
+                    </a>
+                </td>
+                <td>{{Order_History.foranea}}</td>
+                <td>{{Order_History.num_order_cambio}}</td>
+                <td>{{Order_History.nombre_empleado_cambio}}</td>
+                <td>{{Order_History.fecha_de_pedido_cambio}}</td>
+                <td>{{Order_History.metodo_de_pago_cambio}}</td>
+                <td>{{Order_History.estado_pago_cambio}}</td>
+                <td>{{Order_History.estado_pedido_cambio}}</td>
+                <td>{{Order_History.cai_cambio}}</td>
+                <td>{{Order_History.total_cambio}}</td>
+                <td>{{ Order_History.Fecha_Hora|date:"Y-m-d" }}</td>
+                <td>{{ Order_History.Fecha_Hora|time:"H:i:s" }}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+
+{% endblock %}

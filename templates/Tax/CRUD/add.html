@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+   
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Formulario de Impuestos</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="">Nombre:</label>
+                    {{ form.nombre }}
+
+                    {% if form.nombre.errors %}
+                    <div class="text-danger">
+                        {{ form.nombre.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="">Tasa:</label>
+                    {{ form.tasa }}
+                    
+                    {% if form.tasa.errors %}
+                    <div class="text-danger">
+                        {{ form.tasa.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            <div class="table table-striped"></div>
+            <a href="{% url 'tax:home_tax' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

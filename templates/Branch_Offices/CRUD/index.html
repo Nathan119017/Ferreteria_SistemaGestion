@@ -1,0 +1,71 @@
+{% extends 'base\base.html' %}
+{% block estilos %}
+    
+{% endblock %}
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Sucursales Registradas</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    <div>
+        <a href="{% url 'branch_offices:branch_offices_create' %}" class="btn btn-success">
+            <i class="bi bi-person-add"></i>
+            Agregar Sucursales
+        </a>
+    </div>
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>ID</th>
+                <th>Nombre de Sucursal</th>
+                <th>Telefono</th>
+                <th>Direccion</th>
+                <th>Correo Electronico</th>
+                <th>Ciudad</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Branch_Offices in branch_offices %}   
+            <tr>
+                <td>
+                    <a href="{% url 'branch_offices:branch_offices_edit' Branch_Offices.id %}" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"> </i>
+                        
+                    </a>
+                    <a href="{% url 'branch_offices:branch_offices_delete' Branch_Offices.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        
+                    </a>
+                </td>
+                <td>{{Branch_Offices.id}}</td>
+                <td>{{Branch_Offices.nombre_sucursal}}</td>
+                <td>{{Branch_Offices.telefono}}</td>
+                <td>{{Branch_Offices.direccion}}</td>
+                <td>{{Branch_Offices.correo_electronico}}</td>
+                <td>{{Branch_Offices.ciudad}}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+{% endblock %}

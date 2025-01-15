@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+
+<div class="card">
+<div class="card-body">
+    <h1>¿Estás seguro que deseas eliminar esta Categoria?</h1>
+
+    {% if tiene_productos %}
+            <div class="alert alert-danger" role="alert">
+                No puedes eliminar este producto porque está vinculado con una o más de Productos.
+            </div>
+        {% endif %}
+   
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">Nombre:</label>
+            <input type="text"  class="form-control" value="{{categories.nombre}}" disabled>
+        </div>    
+        <div class="form-group">
+            <label for="">Descripcion:</label>
+            <input type="text" class="form-control" value="{{categories.descripcion}}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="">Fecha de creacion:</label>
+            <input type="text" class="form-control" value="{{categories.fecha_de_creacion|date:"d/m/Y H:i:s"}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Fecha de modificacion:</label>
+            <input type="text" class="form-control" value="{{categories.fecha_de_modificacion|date:"d/m/Y H:i:s"}}" disabled> 
+        </div>
+        <input type="submit" value="Eliminar" class="btn btn-danger{% if tiene_productos %} disabled{% endif %}">
+    </form>
+   <div class="table table-striped"></div>
+    <a href="{% url 'categories:home_categories' %}" class="btn btn-primary">Cancelar</a>
+</div>
+</div>
+
+{% endblock %}

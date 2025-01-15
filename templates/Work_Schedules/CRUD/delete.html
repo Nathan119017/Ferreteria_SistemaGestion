@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+
+<div class="card">
+<div class="card-body">
+    <h1>¿Estás seguro que deseas eliminar este Horario de Trabajo?</h1>
+
+    {% if tiene_productos %}
+            <div class="alert alert-danger" role="alert">
+                No puedes eliminar esta devolución porque está vinculada con uno o más Usuarios.
+            </div>
+        {% endif %}
+   
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">Inicio de Jornada:</label>
+            <input type="text"  class="form-control" value="{{work_schedules.inicio_jornada}}" disabled>
+        </div>    
+        <div class="form-group">
+            <label for="">Fin de Jornada:</label>
+            <input type="text" class="form-control" value="{{work_schedules.fin_jornada}}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="">Dias de Trabajo:</label>
+            <input type="text" class="form-control" value="{{work_schedules.dias_trabajo}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Duracion de Jornada:</label>
+            <input type="text" class="form-control" value="{{work_schedules.duracion_jornada}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Tipo de Jornada:</label>
+            <input type="text" class="form-control" value="{{work_schedules.tipo_jornada}}" disabled> 
+        </div>
+        <input type="submit" value="Eliminar" class="btn btn-danger{% if tiene_productos %} disabled{% endif %}">
+    </form>
+   <div class="table table-striped"></div>
+    <a href="{% url 'work_schedules:home_work_schedules' %}" class="btn btn-primary">Cancelar</a>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base\base.html' %}
+{% block estilos %}
+    
+{% endblock %}
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Proveedores Registrados</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    <div>
+        <a href="{% url 'suppliers:suppliers_create' %}" class="btn btn-success">
+            <i class="bi bi-person-add"></i>
+            Agregar Proveedores
+        </a>
+    </div>
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Nombre de la Empresa</th>
+                <th>Telefono</th>
+                <th>Direccion</th>
+                <th>Correo Electronico</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Suppliers in proveedores %}   
+            <tr>
+                <td>
+                    <a href="{% url 'suppliers:suppliers_edit' Suppliers.id %}" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"> </i>
+                        
+                    </a>
+                    <a href="{% url 'suppliers:suppliers_delete' Suppliers.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        
+                    </a>
+                </td>
+                <td>{{Suppliers.id}}</td>
+                <td>{{Suppliers.nombre}}</td>
+                <td>{{Suppliers.apellido}}</td>
+                <td>{{Suppliers.nombre_de_empresa}}</td>
+                <td>{{Suppliers.telefono}}</td>
+                <td>{{Suppliers.direccion}}</td>
+                <td>{{Suppliers.correo_electronico}}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+
+{% endblock %}

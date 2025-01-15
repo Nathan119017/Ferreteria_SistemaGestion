@@ -1,0 +1,85 @@
+{% extends 'base\base.html' %}
+
+{% block estilos %}
+
+{% endblock %}
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Clientes Registrados</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    <div>
+        <a href="{% url 'clients:clients_create' %}" class="btn btn-success">
+            <i class="bi bi-person-add"></i>
+            Agregar Clientes
+        </a>
+    </div>
+
+    
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+       
+        
+
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Direccion</th>
+                <th>Correo Electronico</th>
+                <th>Metodos de Pago</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Clients in clientes %}   
+            <tr>
+                <td>
+                    <a href="{% url 'clients:clients_edit' Clients.id %}" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"> </i>
+                        
+                    </a>
+                    <a href="{% url 'clients:clients_delete' Clients.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        
+                    </a>
+                </td>
+                <td>{{Clients.id}}</td>
+                <td>{{Clients.nombre}}</td>
+                <td>{{Clients.apellido}}</td>
+                <td>{{Clients.fecha_de_nacimiento|date:"d/m/Y"}}</td>
+                <td>{{Clients.direccion}}</td>
+                <td>{{Clients.correo_electronico}}</td>
+                <td>{{Clients.metodos_pago}}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+
+
+
+
+{% endblock %}

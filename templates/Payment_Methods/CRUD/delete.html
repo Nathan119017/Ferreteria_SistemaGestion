@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+
+<div class="card">
+<div class="card-body">
+    <h1>¿Estás seguro que deseas eliminar esta Metodo de Pago?</h1>
+
+    {% if tiene_productos %}
+    <div class="alert alert-danger" role="alert">
+        No puedes eliminar este producto porque está vinculado con una o más de Cliente.
+    </div>
+{% endif %}
+
+{% if tiene_order %}
+    <div class="alert alert-danger" role="alert">
+        No puedes eliminar este producto porque está vinculado con una o más de Orden.
+    </div>
+{% endif %}
+
+{% if tiene_venta %}
+    <div class="alert alert-danger" role="alert">
+        No puedes eliminar este producto porque está vinculado con una o más de Ventas.
+    </div>
+{% endif %}
+
+    
+   
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">Tipo de metodos de Pago:</label>
+            <input type="text"  class="form-control" value="{{payment_methods.tipo_metodo_pago}}" disabled>
+        </div>    
+        <div class="form-group">
+            <label for="">Descripcion:</label>
+            <input type="text" class="form-control" value="{{payment_methods.descripcion}}" disabled>
+        </div>
+        <input type="submit" value="Eliminar" class="btn btn-danger{% if tiene_productos %} disabled{% endif %}{% if tiene_order %} disabled{% endif %}{% if tiene_venta %} disabled{% endif %}">
+    </form>
+   <div class="table table-striped"></div>
+    <a href="{% url 'payment_methods:home_payment_methods' %}" class="btn btn-primary">Cancelar</a>
+</div>
+</div>
+
+{% endblock %}

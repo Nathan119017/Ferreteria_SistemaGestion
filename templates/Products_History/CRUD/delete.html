@@ -1,0 +1,78 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+
+<div class="card">
+<div class="card-body">
+    <h1>¿Estás seguro que deseas eliminar este registro de Productos?</h1>
+   
+
+    {% if tiene_productos %}
+            <div class="alert alert-danger" role="alert">
+                No puedes eliminar este proveedor porque está vinculado con uno o más productos.
+            </div>
+        {% endif %}
+
+        
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">ID del impuesto:</label>
+            <input type="text"  class="form-control" value="{{productos_historial.foranea}}" disabled>
+        </div>    
+        <div class="form-group">
+            <label for="">Cambio del Nombre:</label>
+            <input type="text" class="form-control" value="{{productos_historial.nombre_cambio}}" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="">Cambio de la Descripcion</label>
+            <input type="text" class="form-control" value="{{productos_historial.descripcion_cambio}}" disabled> 
+        </div>
+
+        <div class="form-group">
+            <label for="">Cambio del Fecha de Vencimiento:</label>
+            <input type="text" class="form-control" value="{{productos_historial.fecha_de_vencimiento_cambio}}" disabled> 
+        </div>
+
+        <div class="form-group">
+            <label for="">Cambio de la Stock:</label>
+            <input type="text" class="form-control" value="{{productos_historial.stock_cambio}}" disabled> 
+        </div>
+
+        <div class="form-group">
+            <label for="">Cambio del Precio:</label>
+            <input type="text" class="form-control" value="{{productos_historial.precio_cambio}}" disabled> 
+        </div>
+
+        <div class="form-group">
+            <label for="">Cambio de las Categoria:</label>
+            <input type="text" class="form-control" value="{{productos_historial.categoria_cambio}}" disabled> 
+        </div>
+
+        <div class="form-group">
+            <label for="">Cambio del Proveedor:</label>
+            <input type="text" class="form-control" value="{{productos_historial.proveedor_cambio}}" disabled> 
+        </div>
+
+        
+
+       
+
+
+        <div class="form-group">
+            <label for="">Fecha:</label>
+            <input type="text" class="form-control" value="{{productos_historial.Fecha_Hora|date:"Y-m-d"}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Hora:</label>
+            <input type="text" class="form-control" value="{{productos_historial.Fecha_Hora|time:"H:i:s"}}" disabled> 
+        </div>
+        
+       
+        <input type="submit" value="Eliminar" class="btn btn-danger{% if tiene_productos %} disabled{% endif %}">
+    </form>
+   <div class="table table-striped"></div>
+    <a href="{% url 'products_history:home_products_history' %}" class="btn btn-primary">Cancelar</a>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+   
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Formulario de Horarios de Trabajo</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-group">
+                    <label for="{{ form.inicio_jornada.id_for_label }}">Inicio de Jornada:</label>
+                    {{ form.inicio_jornada }}
+
+                    {% if form.inicio_jornada.errors %}
+                    <div class="text-danger">
+                        {{ form.inicio_jornada.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.fin_jornada.id_for_label }}">Fin de Jornada:</label>
+                    {{ form.fin_jornada }}
+
+                    {% if form.fin_jornada.errors %}
+                    <div class="text-danger">
+                        {{ form.fin_jornada.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.dias_trabajo.id_for_label }}">Dias de Trabajo:</label>
+                    {{ form.dias_trabajo }}
+
+                    {% if form.dias_trabajo.errors %}
+                    <div class="text-danger">
+                        {{ form.dias_trabajo.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            <div class="table table-striped"></div>
+    <a href="{% url 'work_schedules:home_work_schedules' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+   
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Formulario de Inventario</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="">Lote:</label>
+                    {{ form.lote }}
+
+                    {% if form.lote.errors %}
+                    <div class="text-danger">
+                        {{ form.lote.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+
+                <div class="form-group">
+                    <label for="">Cantidad de Inventario:</label>
+                    {{ form.cantidadinventario }}
+
+                    {% if form.cantidadinventario.errors %}
+                    <div class="text-danger">
+                        {{ form.cantidadinventario.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="">Fecha de Ingreso:</label>
+                    {{ form.fecha_ingreso }}
+
+                    {% if form.fecha_ingreso.errors %}
+                    <div class="text-danger">
+                        {{ form.fecha_ingreso.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="">Cantidad Mínima:</label>
+                    {{ form.cantidadminima }}
+
+                    {% if form.cantidadminima.errors %}
+                    <div class="text-danger">
+                        {{ form.cantidadminima.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="">Cantidad Máxima:</label>
+                    {{ form.cantidadmaxima }}
+
+                    {% if form.cantidadmaxima.errors %}
+                    <div class="text-danger">
+                        {{ form.cantidadmaxima.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="">Producto:</label>
+                    {{ form.idproducto }}
+
+                    {% if form.idproducto.errors %}
+                    <div class="text-danger">
+                        {{ form.idproducto.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="">Sucursal:</label>
+                    {{ form.idsucursal }}
+
+                    {% if form.idsucursal.errors %}
+                    <div class="text-danger">
+                        {{ form.idsucursal.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            <div class="table table-striped"></div>
+    <a href="{% url 'inventory:home_inventory' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

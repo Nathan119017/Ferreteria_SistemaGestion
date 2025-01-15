@@ -1,0 +1,70 @@
+{% extends 'base\base.html' %}
+{% block estilos %}
+    
+{% endblock %}
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Descuentos y Promociones Registrados</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    <div>
+        <a href="{% url 'discprom:discprom_create' %}" class="btn btn-success">
+            <i class="bi bi-person-add"></i>
+            Agregar Descuento o Promocion
+        </a>
+    </div>
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Cantidad de Promocion o Descuento</th>
+                <th>Promocion o Descuento</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for PromDisc in discprom %}   
+            <tr>
+                <td>
+                    <a href="{% url 'discprom:discprom_edit' PromDisc.id %}" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"> </i>
+                        
+                    </a>
+                    <a href="{% url 'discprom:discprom_delete' PromDisc.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        
+                    </a>
+                </td>
+                <td>{{PromDisc.id}}</td>
+                <td>{{PromDisc.nombrepromocion_descuento}}</td>
+                <td>{{PromDisc.porcentaje}}</td>
+                <td>{{PromDisc.promocion_descuento}}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+
+
+{% endblock %}

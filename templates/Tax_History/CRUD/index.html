@@ -1,0 +1,64 @@
+{% extends 'base\base.html' %}
+{% block estilos %}
+    
+{% endblock %}
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Historial de Impuestos</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>Impuesto ID</th>
+                <th>Cambio Nombre</th>
+                <th>Cambio Tasa</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Tax_History in impuesto_historial %}   
+            <tr>
+                <td>
+                        
+                    </a>
+                    <a href="{% url 'tax_history:tax_history_delete' Tax_History.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        
+                    </a>
+                </td>
+                <td>{{Tax_History.foranea}}</td>
+                <td>{{Tax_History.nombre_cambio}}</td>
+                <td>{{Tax_History.tasa_cambio}}</td>
+                <td>{{ Tax_History.Fecha_Hora|date:"Y-m-d" }}</td>
+                <td>{{ Tax_History.Fecha_Hora|time:"H:i:s" }}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+
+{% endblock %}

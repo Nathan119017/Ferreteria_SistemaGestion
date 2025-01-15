@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+
+<div class="card">
+<div class="card-body">
+    <h1>¿Estás seguro que deseas eliminar este detalle de producto?</h1>
+   
+
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">Nombre del Producto:</label>
+            <input type="text"  class="form-control" value="{{productdetails.nombre}}" disabled>
+        </div>    
+        <div class="form-group">
+            <label for="">Promocion o Descuento:</label>
+            <input type="text" class="form-control" value="{{productdetails.nombrepromocion_descuento}}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="">Cantidad:</label>
+            <input type="text" class="form-control" value="{{productdetails.cantidad}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Precio Unitario:</label>
+            <input type="text" class="form-control" value="{{productdetails.precio_unitario}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Descripcion:</label>
+            <input type="text" class="form-control" value="{{productdetails.descripcion}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Precio Final:</label>
+            <input type="text" class="form-control" value="{{productdetails.precio_final}}" disabled> 
+        </div>
+       
+        <input type="submit" value="Eliminar" class="btn btn-danger">
+    </form>
+   <div class="table table-striped"></div>
+    <a href="{% url 'productsdetail:home_productsdetail' %}" class="btn btn-primary">Cancelar</a>
+</div>
+</div>
+{% endblock %}

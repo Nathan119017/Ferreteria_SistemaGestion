@@ -1,0 +1,80 @@
+{% extends 'base\base.html' %}
+{% block estilos %}
+    
+{% endblock %}
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Historial de Ventas</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>Venta ID</th>
+                <th>Cambio Cliente</th>
+                <th>Cambio Producto</th>
+                <th>Cambio Cantidad de Producto</th>
+                <th>Cambio Precio de Venta</th>
+                <th>Cambio Fecha de Venta</th>
+                <th>Cambio Metodo de Pago</th>
+                <th>Cambio Total de Venta</th>
+                <th>Cambio Sucursal</th>
+                <th>Cambio Usuario</th>
+                <th>Cambio Num. de Factura</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Sale_History in venta_historial %}   
+            <tr>
+                <td>
+                        
+                    </a>
+                    <a href="{% url 'sale_history:sale_history_delete' Sale_History.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        
+                    </a>
+                </td>
+                <td>{{ Sale_History.foranea}}</td>
+                <td>{{Sale_History.cliente_cambio}}</td>
+                <td>{{Sale_History.producto_cambio}}</td>
+                <td>{{Sale_History.cantidad_producto_cambio}}</td>
+                <td>{{Sale_History.precio_venta_cambio}}</td>
+                <td>{{Sale_History.fecha_venta_cambio}}</td>
+                <td>{{Sale_History.metodo_pago_cambio}}</td>
+                <td>{{Sale_History.total_venta_cambio}}</td>
+                <td>{{Sale_History.sucursal_cambio}}</td>
+                <td>{{Sale_History.usuario_cambio}}</td>
+                <td>{{Sale_History.num_factura_cambio}}</td>
+                <td>{{ Sale_History.Fecha_Hora|date:"Y-m-d" }}</td>
+                <td>{{ Sale_History.Fecha_Hora|time:"H:i:s" }}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+
+{% endblock %}

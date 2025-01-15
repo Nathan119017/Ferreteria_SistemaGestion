@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+
+<div class="card">
+<div class="card-body">
+    <h1>¿Estás seguro que deseas eliminar este Inventario?</h1>
+   
+
+    {% if tiene_productos %}
+            <div class="alert alert-danger" role="alert">
+                No puedes eliminar este inventario porque está vinculado con un empleado.
+            </div>
+        {% endif %}
+
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">Lote:</label>
+            <input type="text"  class="form-control" value="{{ inventario.lote }}" disabled>
+        </div>    
+        <div class="form-group">
+            <label for="">Cantidad de Inventario:</label>
+            <input type="text" class="form-control" value="{{ inventario.cantidadinventario }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="">Fecha de Ingreso:</label>
+            <input type="text" class="form-control" value="{{ inventario.fecha_ingreso|date:"d/m/Y" }}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Cantidad Mínima:</label>
+            <input type="text" class="form-control" value="{{ inventario.cantidadminima }}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Cantidad Máxima:</label>
+            <input type="text" class="form-control" value="{{ inventario.cantidadmaxima }}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Producto:</label>
+            <input type="text" class="form-control" value="{{ inventario.idproducto }}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Sucursal:</label>
+            <input type="text" class="form-control" value="{{ inventario.idsucursal }}" disabled> 
+        </div>
+        <input type="submit" value="Eliminar" class="btn btn-danger{% if tiene_productos %} disabled{% endif %}">
+    </form>
+   <div class="table table-striped"></div>
+    <a href="{% url 'inventory:home_inventory' %}" class="btn btn-primary">Cancelar</a>
+</div>
+</div>
+
+{% endblock %}

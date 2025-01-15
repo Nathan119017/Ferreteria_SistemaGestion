@@ -1,0 +1,71 @@
+{% extends 'base\base.html' %}
+{% block estilos %}
+    
+{% endblock %}
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Horarios de Trabajo Registrados</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    <div>
+        <a href="{% url 'work_schedules:work_schedules_create' %}" class="btn btn-success">
+            <i class="bi bi-person-add"></i>
+            Agregar Horarios de Trabajo
+        </a>
+    </div>
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>ID</th>
+                <th>Inicio de Jornada</th>
+                <th>Fin de Jornada</th>
+                <th>Dias de trabajo</th>
+                <th>Duracion de jornada</th>
+                <th>Tipo de Jornada</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Work_Schedules in work_schedules %}   
+            <tr>
+                <td>
+                    <a href="{% url 'work_schedules:work_schedules_edit' Work_Schedules.id %}" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"> </i>
+                        
+                    </a>
+                    <a href="{% url 'work_schedules:work_schedules_delete' Work_Schedules.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        
+                    </a>
+                </td>
+                <td>{{Work_Schedules.id}}</td>
+                <td>{{Work_Schedules.inicio_jornada}}</td>
+                <td>{{Work_Schedules.fin_jornada}}</td>
+                <td>{{Work_Schedules.dias_trabajo}}</td>
+                <td>{{Work_Schedules.duracion_jornada}}</td>
+                <td>{{Work_Schedules.tipo_jornada}}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+   
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Formulario de Tipos de Documento</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="">Nombre:</label>
+                    {{ form.nombre }}
+
+                    {% if form.nombre.errors %}
+                    <div class="text-danger">
+                        {{ form.nombre.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="">Descripcion:</label>
+                    {{ form.descripcion }}
+
+                    {% if form.descripcion.errors %}
+                    <div class="text-danger">
+                        {{ form.descripcion.errors }}
+                    </div>
+                    {% endif %}
+
+                    
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            <div class="table table-striped"></div>
+    <a href="{% url 'document_type:home_document_type' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

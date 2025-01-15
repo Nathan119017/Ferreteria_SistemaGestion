@@ -1,0 +1,69 @@
+{% extends 'base\base.html' %}
+{% block estilos %}
+    
+{% endblock %}
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Categorias Registrados</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    <div>
+        <a href="{% url 'categories:categories_create' %}" class="btn btn-success">
+            <i class="bi bi-person-add"></i>
+            Agregar Categorias
+        </a>
+    </div>
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Fecha de Creacion</th>
+                <th>Fecha de Modificacion</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Categories in categories %}   
+            <tr>
+                <td>
+                    <a href="{% url 'categories:categories_edit' Categories.id %}" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"> </i>
+                        
+                    </a>
+                    <a href="{% url 'categories:categories_delete' Categories.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        
+                    </a>
+                </td>
+                <td>{{Categories.id}}</td>
+                <td>{{Categories.nombre}}</td>
+                <td>{{Categories.descripcion}}</td>
+                <td>{{Categories.fecha_de_creacion|date:"d/m/Y H:i:s"}}</td>
+                <td>{{Categories.fecha_de_modificacion|date:"d/m/Y H:i:s"}}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+{% endblock %}

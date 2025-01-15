@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+   
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Formulario de Detalle de Ordenes</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="">Numero de Orden:</label>
+                    {{ form.num_order }}
+
+                    {% if form.num_order.errors %}
+                    <div class="text-danger">
+                        {{ form.num_order.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="">Nombre de Producto:</label>
+                    {{ form.nombre_product }}
+
+                    {% if form.nombre_product.errors %}
+                    <div class="text-danger">
+                        {{ form.nombre_product.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="">Cantidad de Pedido:</label>
+                    {{ form.cantidad }}
+
+                    {% if form.cantidad.errors %}
+                    <div class="text-danger">
+                        {{ form.cantidad.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="">Descripcion:</label>
+                    {{ form.descripcion }}
+
+                    {% if form.descripcion.errors %}
+                    <div class="text-danger">
+                        {{ form.descripcion.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="">Precio Unitario:</label>
+                    {{ form.precio_unitario }}
+
+                    {% if form.precio_unitario.errors %}
+                    <div class="text-danger">
+                        {{ form.precio_unitario.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            <div class="table table-striped"></div>
+    <a href="{% url 'orderdetail:home_orderdetail' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

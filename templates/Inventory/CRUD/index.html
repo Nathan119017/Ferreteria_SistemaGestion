@@ -1,0 +1,75 @@
+{% extends 'base\base.html' %}
+
+{% block estilos %}
+    <!-- Agrega aquí tus estilos adicionales si los necesitas -->
+{% endblock %}
+
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Inventario Registrado</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    <div>
+        <a href="{% url 'inventory:inventory_create' %}" class="btn btn-success">
+            <i class="bi bi-person-add"></i>
+            Agregar Inventario
+        </a>
+    </div>
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>ID</th>
+                <th>Lote</th>
+                <th>Cantidad en Inventario</th>
+                <th>Fecha de Ingreso</th>
+                <th>Cantidad Mínima</th>
+                <th>Cantidad Máxima</th>
+                <th>Producto</th>
+                <th>Sucursal</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Inventory in inventario %}   
+            <tr>
+                <td>
+                    <a href="{% url 'inventory:inventory_edit' Inventory.id %}" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"> </i>
+                    </a>
+                    <a href="{% url 'inventory:inventory_delete' Inventory.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+                <td>{{ Inventory.id }}</td>
+                <td>{{ Inventory.lote }}</td>
+                <td>{{ Inventory.cantidadinventario }}</td>
+                <td>{{ Inventory.fecha_ingreso|date:"d/m/Y" }}</td>
+                <td>{{ Inventory.cantidadminima }}</td>
+                <td>{{ Inventory.cantidadmaxima }}</td>
+                <td>{{ Inventory.idproducto }}</td>
+                <td>{{ Inventory.idsucursal }}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+{% endblock %}

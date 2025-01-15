@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+   
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Formulario de Devoluciones</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-group">
+                    <label for="{{ form.nombre_producto.id_for_label }}">Nombre Producto:</label>
+                    {{ form.nombre_producto }}
+                    
+                    {% if form.nombre_producto.errors %}
+                    <div class="text-danger">
+                        {{ form.nombre_producto.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.cantidad_retornada.id_for_label }}">Cantidad Retornada:</label>
+                    {{ form.cantidad_retornada }}
+                    
+                    {% if form.cantidad_retornada.errors %}
+                    <div class="text-danger">
+                        {{ form.cantidad_retornada.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+               
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            <div class="table table-striped"></div>
+    <a href="{% url 'devolucion:home_devolucion' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

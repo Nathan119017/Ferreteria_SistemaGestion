@@ -1,0 +1,64 @@
+{% extends 'base\base.html' %}
+{% block estilos %}
+    
+{% endblock %}
+{% block contenido %}
+    
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">Historial de Devolucion</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+   
+    
+    <div class="table table-striped"></div>
+    <table id="dataTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>Devolucion ID</th>
+                <th>Cambio Nombre del Producto</th>
+                <th>Cambio Cantidad Retornada</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Devolucion_History in devolucion_historial %}   
+            <tr>
+                <td>
+                        
+                    </a>
+                    <a href="{% url 'devolucion_history:devolucion_history_delete' Devolucion_History.id %}" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        
+                    </a>
+                </td>
+                <td>{{Devolucion_History.foranea.id}}</td>
+                <td>{{Devolucion_History.nombre_producto_cambio}}</td>
+                <td>{{Devolucion_History.cantidad_retornada_cambio}}</td>
+                <td>{{ Devolucion_History.Fecha_Hora|date:"Y-m-d" }}</td>
+                <td>{{ Devolucion_History.Fecha_Hora|time:"H:i:s" }}</td>
+            </tr>
+        {% endfor %}   
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+        $('#dataTable').DataTable();
+  });
+  
+    });
+</script>
+
+
+{% endblock %}

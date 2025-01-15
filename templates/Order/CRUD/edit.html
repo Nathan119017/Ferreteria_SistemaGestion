@@ -1,0 +1,113 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+   
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Formulario de Ordenes</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                
+                <div class="form-group">
+                    <label for="">Numero de Orden:</label>
+                    {{ form.num_order }}
+
+                    {% if form.num_order.errors %}
+                    <div class="text-danger">
+                        {{ form.num_order.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="">Nombre de Empleado:</label>
+                    {{ form.nombre_empleado }}
+
+                    {% if form.nombre_empleado.errors %}
+                    <div class="text-danger">
+                        {{ form.nombre_empleado.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="">Fecha de Pedido:</label>
+                    {{ form.fecha_de_pedido }}
+
+                    {% if form.fecha_de_pedido.errors %}
+                    <div class="text-danger">
+                        {{ form.fecha_de_pedido.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="">Metodo de Pago:</label>
+                    {{ form.metodo_de_pago }}
+
+                    {% if form.metodo_de_pago.errors %}
+                    <div class="text-danger">
+                        {{ form.metodo_de_pago.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="">Estado de Pago:</label>
+                    {{ form.estado_pago }}
+
+                    {% if form.estado_pago.errors %}
+                    <div class="text-danger">
+                        {{ form.estado_pago.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="">Estado de Pedido:</label>
+                    {{ form.estado_pedido }}
+
+                    {% if form.estado_pedido.errors %}
+                    <div class="text-danger">
+                        {{ form.estado_pedido.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                
+                
+
+
+                <div class="form-group">
+                    <label for="">CAI:</label>
+                    {{ form.cai }}
+
+                    {% if form.cai.errors %}
+                    <div class="text-danger">
+                        {{ form.cai.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="">Total Pedido:</label>
+                    {{ form.total }}
+
+                    {% if form.total.errors %}
+                    <div class="text-danger">
+                        {{ form.total.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            <div class="table table-striped"></div>
+    <a href="{% url 'order:home_order' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

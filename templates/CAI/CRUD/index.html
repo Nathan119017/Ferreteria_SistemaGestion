@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+   
+<div class="card">
+    <h5 class="card-header card text-white bg-primary mb-3">CAI Registradas</h5>
+    <div class="card-body">
+        <div>
+            <a href="{% url 'cai:cai_create' %}" class="btn btn-success">
+                <i class="bi bi-person-add"></i>
+                Agregar CAI
+            </a>
+        </div>
+        <div class="table table-striped"></div>
+        <table id="dataTable" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Acciones</th>
+                    <th>ID</th>
+                    <th>Nombre Empresa</th>
+                    <th>CAI</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for CAI in cai %}   
+                <tr>
+                    <td>
+                        <a href="{% url 'cai:cai_edit' CAI.id %}" class="btn btn-primary">
+                            <i class="bi bi-pencil-square"> </i>
+                        </a>
+                        <a href="{% url 'cai:cai_delete' CAI.id %}" class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                    <td>{{ CAI.id }}</td>
+                    <td>{{ CAI.nombre_empresa.nombre_de_empresa }}</td>
+                    <td>{{ CAI.cai }}</td>
+                </tr>
+            {% endfor %}   
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% load static %}
+<script src="{% static '/base/vendor/jquery/jquery.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+        // Inicializar el plugin DataTables
+        $('#dataTable').DataTable();
+    });
+</script>
+
+{% endblock %}

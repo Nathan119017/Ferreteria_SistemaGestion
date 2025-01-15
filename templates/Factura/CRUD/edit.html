@@ -1,0 +1,139 @@
+{% extends 'Factura/base.html' %}
+{% block contenido %}
+   
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Formulario de Facturas</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-group">
+                    <label for="{{ form.num_factura.id_for_label }}">Numero de Factura:</label>
+                    {{ form.num_factura }}
+
+                    {% if form.num_factura.errors %}
+                    <div class="text-danger">
+                        {{ form.num_factura.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.idcliente.id_for_label }}">ID Cliente:</label>
+                    {{ form.idcliente }}
+
+                    {% if form.idcliente.errors %}
+                    <div class="text-danger">
+                        {{ form.idcliente.errors }}
+                    </div>
+                    {% endif %}
+
+            
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.idempleado.id_for_label }}">ID Empleado:</label>
+                    {{ form.idempleado }}
+
+                    {% if form.idempleado.errors %}
+                    <div class="text-danger">
+                        {{ form.idempleado.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.idmetododepago.id_for_label }}">ID Metodo de Pago</label>
+                    {{ form.idmetododepago }}
+
+                    {% if form.idmetododepago.errors %}
+                    <div class="text-danger">
+                        {{ form.idmetododepago.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.idproducts.id_for_label }}">ID Producto</label>
+                    {{ form.idproducts }}
+                    
+                    {% if form.idproducts.errors %}
+                    <div class="text-danger">
+                        {{ form.idproducts.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.idproductsdetail.id_for_label }}">ID Detalle de Producto:</label>
+                    {{ form.idproductsdetail }}
+
+                    {% if form.idproductsdetail.errors %}
+                    <div class="text-danger">
+                        {{ form.idproductsdetail.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.idtax.id_for_label }}">ID Impuesto:</label>
+                    {{ form.idtax }}
+
+                    {% if form.idtax.errors %}
+                    <div class="text-danger">
+                        {{ form.idtax.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.iddescuento.id_for_label }}">ID Descuento:</label>
+                    {{ form.iddescuento }}
+
+                    {% if form.iddescuento.errors %}
+                    <div class="text-danger">
+                        {{ form.iddescuento.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.idcai.id_for_label }}">ID CAI:</label>
+                    {{ form.idcai }}
+
+                    {% if form.idcai.errors %}
+                    <div class="text-danger">
+                        {{ form.idcai.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.RTN.id_for_label }}">RTN:</label>
+                    {{ form.RTN }}
+
+                    {% if form.RTN.errors %}
+                    <div class="text-danger">
+                        {{ form.RTN.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            <div class="table table-striped"></div>
+    <a href="{% url 'factura:home_factura' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

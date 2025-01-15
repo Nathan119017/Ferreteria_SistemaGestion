@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+
+<div class="card">
+<div class="card-body">
+    <h1>¿Estás seguro que deseas eliminar este producto?</h1>
+   
+    {% if tiene_productos %}
+            <div class="alert alert-danger" role="alert">
+                No puedes eliminar este producto porque está vinculado con una o más de Inventario.
+            </div>
+        {% endif %}
+
+        {% if tiene_detalleproducto %}
+            <div class="alert alert-danger" role="alert">
+                No puedes eliminar este producto porque está vinculado con una o más Detalle de Producto.
+            </div>
+        {% endif %}
+
+        {% if tiene_venta %}
+            <div class="alert alert-danger" role="alert">
+                No puedes eliminar este producto porque está vinculado con una o más Ventas.
+            </div>
+        {% endif %}
+
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">Nombre:</label>
+            <input type="text"  class="form-control" value="{{productos.nombre}}" disabled>
+        </div>    
+        <div class="form-group">
+            <label for="">Descripcion:</label>
+            <input type="text" class="form-control" value="{{productos.descripcion}}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="">Fecha de Vencimiento:</label>
+            <input type="text" class="form-control" value="{{productos.fecha_de_vencimiento}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Precio del Producto:</label>
+            <input type="text" class="form-control" value="{{productos.precio}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Categoria del Producto:</label>
+            <input type="text" class="form-control" value="{{productos.categoria}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Proveedor del Producto:</label>
+            <input type="text" class="form-control" value="{{productos.proveedor}}" disabled> 
+        </div>
+       
+        <input type="submit" value="Eliminar" class="btn btn-danger{% if tiene_productos %} disabled{% endif %}{% if tiene_detalleproducto %} disabled{% endif %} {% if tiene_venta %} disabled{% endif %}">
+    </form>
+   <div class="table table-striped"></div>
+    <a href="{% url 'products:home_products' %}" class="btn btn-primary">Cancelar</a>
+</div>
+</div>
+{% endblock %}

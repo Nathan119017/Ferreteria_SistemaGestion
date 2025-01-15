@@ -1,0 +1,70 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+
+<div class="card">
+<div class="card-body">
+    <h1>¿Estás seguro que deseas eliminar este registro de Ordenes?</h1>
+   
+
+    {% if tiene_productos %}
+            <div class="alert alert-danger" role="alert">
+                No puedes eliminar esta orden porque está vinculado con uno o más productos.
+            </div>
+        {% endif %}
+
+        
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">ID de la Orden:</label>
+            <input type="text"  class="form-control" value="{{orden_historial.foranea}}" disabled>
+        </div>    
+        <div class="form-group">
+            <label for="">Cambio Num. de Orden:</label>
+            <input type="text" class="form-control" value="{{orden_historial.num_order_cambio}}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="">Cambio del Empleado:</label>
+            <input type="text" class="form-control" value="{{orden_historial.nombre_empleado_cambio}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Cambio de Fecha de Pedido:</label>
+            <input type="text" class="form-control" value="{{orden_historial.fecha_de_pedido_cambio}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Cambio de Metodo de Pago:</label>
+            <input type="text" class="form-control" value="{{orden_historial.metodo_de_pago_cambio}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Cambio del Estado de Pago:</label>
+            <input type="text" class="form-control" value="{{orden_historial.estado_pago_cambio}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Cambio del Estado del Pedido:</label>
+            <input type="text" class="form-control" value="{{orden_historial.estado_pedido_cambio}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Cambio del CAI:</label>
+            <input type="text" class="form-control" value="{{orden_historial.cai_cambio}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Cambio del Total:</label>
+            <input type="text" class="form-control" value="{{orden_historial.total_cambio}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Fecha:</label>
+            <input type="text" class="form-control" value="{{orden_historial.Fecha_Hora|date:"Y-m-d"}}" disabled> 
+        </div>
+        <div class="form-group">
+            <label for="">Hora:</label>
+            <input type="text" class="form-control" value="{{orden_historial.Fecha_Hora|time:"H:i:s"}}" disabled> 
+        </div>
+        
+       
+        <input type="submit" value="Eliminar" class="btn btn-danger{% if tiene_productos %} disabled{% endif %}">
+    </form>
+   <div class="table table-striped"></div>
+    <a href="{% url 'order_history:home_order_history' %}" class="btn btn-primary">Cancelar</a>
+</div>
+</div>
+{% endblock %}

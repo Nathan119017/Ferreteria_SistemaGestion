@@ -1,0 +1,139 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+   
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Formulario de Proveedores</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-group">
+                    <label for="{{ form.cliente.id_for_label }}">Cliente:</label>
+                    {{ form.cliente }}
+                    
+                    {% if form.cliente.errors %}
+                    <div class="text-danger">
+                        {{ form.cliente.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.producto.id_for_label }}">Producto:</label>
+                    {{ form.producto }}
+                    
+                    {% if form.producto.errors %}
+                    <div class="text-danger">
+                        {{ form.producto.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.cantidad_producto.id_for_label }}">Cantidad de Producto:</label>
+                    {{ form.cantidad_producto }}
+
+                    {% if form.cantidad_producto.errors %}
+                    <div class="text-danger">
+                        {{ form.cantidad_producto.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.precio_venta.id_for_label }}">Precio de Venta:</label>
+                    {{ form.precio_venta }}
+
+                    {% if form.precio_venta.errors %}
+                    <div class="text-danger">
+                        {{ form.precio_venta.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.fecha_venta.id_for_label }}">Fecha de Venta:</label>
+                    {{ form.fecha_venta }}
+
+                    {% if form.fecha_venta.errors %}
+                    <div class="text-danger">
+                        {{ form.fecha_venta.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.metodo_pago.id_for_label }}">Metodo de Pago:</label>
+                    {{ form.metodo_pago }}
+
+                    {% if form.metodo_pago.errors %}
+                    <div class="text-danger">
+                        {{ form.metodo_pago.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.total_venta.id_for_label }}">Total de la Venta:</label>
+                    {{ form.total_venta }}
+
+                    {% if form.total_venta.errors %}
+                    <div class="text-danger">
+                        {{ form.total_venta.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.sucursal.id_for_label }}">Sucursal:</label>
+                    {{ form.sucursal }}
+
+                    {% if form.sucursal.errors %}
+                    <div class="text-danger">
+                        {{ form.sucursal.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.usuario.id_for_label }}">Usuario:</label>
+                    {{ form.usuario }}
+
+                    {% if form.usuario.errors %}
+                    <div class="text-danger">
+                        {{ form.usuario.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.num_factura.id_for_label }}">Num. de la Factura:</label>
+                    {{ form.num_factura }}
+
+                    {% if form.num_factura.errors %}
+                    <div class="text-danger">
+                        {{ form.num_factura.errors }}
+                    </div>
+                    {% endif %}
+
+                </div>
+               
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            <div class="table table-striped"></div>
+    <a href="{% url 'sale:home_sale' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
